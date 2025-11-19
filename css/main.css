@@ -304,7 +304,7 @@ td {
 }
 
 .slogan {
-    padding: 1rem 0;
+    padding: 2rem;
     width: calc(100vw - 80px);
     width: calc(100dvw - 80px);
     max-width: 900px;
@@ -848,3 +848,4 @@ td {
         font-size: 12px;
     }
 }
+
