@@ -1,0 +1,9 @@
+# 모든 검색 엔진 로봇에 적용
+User-agent: *
+
+# 사이트 전체 크롤링 허용 (제한 없음)
+Allow: /
+
+# 사이트맵 파일의 위치 지정 (SEO에 중요)
+# 해당 URL이 정확한 위치인지 확인해주세요.
+Sitemap: https://firstcnd.com/sitemap.xml
