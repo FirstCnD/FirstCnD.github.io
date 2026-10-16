@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
@@ -9,26 +9,18 @@
         <link rel="apple-touch-icon" href="/src/logo.png" sizes="180x180" />
 
         <link rel="stylesheet" href="/css/main.css" />
-        <link
-            href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-            rel="stylesheet"
-        />
         <script src="/js/analytics.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     </head>
 
     <body>
-        <nav id="nav-placeholder" class="mainNav navNews"></nav>
-        <div class="sectionMargin"></div>
-        <div class="container">
-            <h1>회사소식</h1>
-            <p>퍼스트씨엔디의 소식을 전해드립니다.</p>
+        <nav id="nav" class="navNews"></nav>
+        <div>
+            <h1 class="title">회사소식</h1>
+            <p class="titleSub">퍼스트씨엔디의 소식을 전해드립니다.</p>
         </div>
-        <div class="container">
-            <div class="newsContainer"></div>
-        </div>
-        <footer id="footer-placeholder" class="footer"></footer>
+        <div id="news"></div>
+        <footer id="footer"></footer>
         <script src="/js/loadComponents.js"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="/js/loadNews.js"></script>
     </body>
 </html>
