@@ -119,7 +119,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                         (p) => `
                     <div class="swiper-slide">
                         <div class="info"><h3>${p.name}</h3></div>
-                        <a href="${p.url}"><img src="${p.image}" alt="${p.name}" /></a>
+                        <a href="${p.url}">
+                            <img src="${p.image}" alt="${p.name}" />
+                            <div class="clickBox"><img src="/src/mouse-left.svg" /><span>프로젝트 보기</span></div>
+                        </a>
                     </div>
                 `
                     )
@@ -270,7 +273,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (info.area) {
                     const el = projectPlaceholder.querySelector(".area");
-                    if (el) el.textContent = `${String(Number(info.area).toFixed(2)).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}m²`;
+                    if (el) el.textContent = info.area;
                     if (infoGroup) infoGroup.innerHTML += "<div>면적</div>";
                 }
 
@@ -311,9 +314,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     swiperWrapper.innerHTML = slideHtml;
 
                     // [핵심] 주입된 모든 이미지가 브라우저에 완전히 로드될 때까지 대기
-                    const imgElements = swiperWrapper.querySelectorAll("img");
+                    const imgEl = swiperWrapper.querySelectorAll("img");
                     await Promise.all(
-                        Array.from(imgElements).map((img) => {
+                        Array.from(imgEl).map((img) => {
                             if (img.complete) return Promise.resolve();
                             return new Promise((resolve) => {
                                 img.addEventListener("load", resolve, { once: true });
@@ -321,6 +324,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                             });
                         })
                     );
+
+                    const loadingEl = projectPlaceholder.querySelector(".loading");
+                    loadingEl.innerHTML = "";
                 }
             }
         } catch (error) {

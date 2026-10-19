@@ -214,6 +214,55 @@ li {
     opacity: 1;
 }
 
+.loading {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-family: "Paperozi";
+}
+
+.loading img {
+    position: relative !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    animation: spin 1s linear infinite;
+    will-change: transform;
+}
+
+.clickBox {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-family: "Paperozi";
+    pointer-events: none;
+}
+
+*:hover > .clickBox {
+    opacity: 1;
+}
+
+.clickBox img {
+    position: relative !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    opacity: 1 !important;
+}
+
 #intro {
     padding: 4rem 2rem;
     height: 100vh;
@@ -315,10 +364,15 @@ li {
     text-align: center;
 }
 
-#homeProjects .swiper-slide img {
+#homeProjects .swiper-slide a img {
     max-width: min(100vw, 100dvw, 1200px);
     height: auto;
     max-height: 100%;
+    transition: all 0.3s ease;
+}
+
+#homeProjects a:hover img {
+    opacity: 0.25;
 }
 
 #homeNews {
@@ -638,6 +692,14 @@ li {
     opacity: 0.25;
 }
 
+#projects .clickBox {
+    height: fit-content;
+}
+
+#project {
+    min-height: min(100vh, 100dvh);
+}
+
 #project .info {
     z-index: 1;
     position: absolute;
@@ -687,9 +749,39 @@ li {
     color: var(--text-secondary);
 }
 
-#project .swiper {
-    width: 100%;
-    height: min(100vh, 100dvh);
+#project .back {
+    pointer-events: all;
+    margin-top: 1rem;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+#project .back:hover {
+    color: var(--bg-color);
+    background-color: var(--text-primary);
+}
+
+#project .back span {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--text-primary);
+    border-radius: 100%;
+    font-size: small;
+    transition: all 0.3s ease;
+}
+
+#project .back:hover span {
+    border-color: var(--bg-color);
 }
 
 #project .swiper-slide {
@@ -702,8 +794,14 @@ li {
 
 #project .swiper-slide img {
     max-width: min(100vw, 100dvw);
-    height: auto;
-    max-height: 100%;
+    max-height: min(100vh, 100dvh);
+    object-fit: contain;
+}
+
+#project .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #news {
@@ -757,6 +855,7 @@ li {
     margin: 0 auto;
     padding: 0 2rem;
     width: min(100%, 1200px);
+    min-height: min(100vh, 100dvh);
 }
 
 .contact .way {
@@ -764,68 +863,98 @@ li {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+    align-items: center;
 }
 
 .contact .mapBox {
     position: relative;
     width: 100%;
+    text-align: center;
 }
 
-.contact .mapLink {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    opacity: 0;
-    transition: all 0.3s ease;
-    font-family: "Paperozi";
-    pointer-events: none;
-}
-
-.contact .mapBox:hover .mapLink {
-    opacity: 1;
-}
-
-.contact .map {
+.contact svg {
     width: 100%;
     transition: all 0.3s ease;
 }
 
-.contact .map #highLight {
-    filter: drop-shadow(0 0 2px var(--text-primary))
-        drop-shadow(0 0 4px var(--text-primary))
-        drop-shadow(0 0 6px var(--item-color))
-        drop-shadow(0 0 9px var(--item-color))
-        drop-shadow(0 0 12px var(--item-color));
-}
-
-.contact .mapBox:hover .map {
+.contact .mapBox:hover svg {
     opacity: 0.25;
 }
 
-.contact .infoBox {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+.contact svg #highLight {
+    filter: drop-shadow(0 0 2px var(--text-primary))
+        drop-shadow(0 0 4px var(--text-primary))
+        drop-shadow(0 0 6px var(--item-color))
+        drop-shadow(0 0 9px var(--item-color));
+}
+
+.contact .building {
+    border-spacing: 0 0.25rem;
+    margin: 2rem auto;
+    width: fit-content;
+    text-align: center;
+    font-family: "Paperozi";
+    font-size: small;
+}
+
+.contact .building td {
+    padding: 0.25rem 1rem;
+}
+
+.contact .building tr.floor td {
+    padding: 0 2rem 0 0;
+    height: 1px;
+    background-color: var(--text-primary);
+}
+
+.contact .building td.floor {
+    color: var(--text-secondary);
+}
+
+.contact .building td.floor.here {
+    color: var(--text-primary);
+}
+
+.contact .building .room {
+    border: 1px solid var(--text-primary);
+}
+
+.contact .building .room.here {
+    color: var(--bg-color);
+    background-color: var(--text-primary);
+    font-weight: 700;
+}
+
+.contact .building .neon {
+    text-shadow:
+        0 0 2px var(--text-primary),
+        0 0 4px var(--text-primary),
+        0 0 6px var(--item-color),
+        0 0 9px var(--item-color),
+        0 0 12px var(--item-color),
+        0 0 16px var(--item-color),
+        0 0 32px var(--item-color),
+        0 0 64px var(--item-color);
+}
+
+.contact .building .room.neon {
+    text-shadow: none;
+    box-shadow:
+        0 0 2px var(--text-primary),
+        0 0 4px var(--item-color),
+        0 0 6px var(--item-color),
+        0 0 9px var(--item-color);
 }
 
 .contact .info {
     border-collapse: collapse;
+    margin: 2rem auto;
+    width: fit-content;
 }
 
 .contact .info a {
     display: block;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     line-height: 1;
 }
 
@@ -859,5 +988,14 @@ li {
             0 0 32px var(--item-color),
             0 0 64px var(--item-color),
             0 0 128px var(--item-color);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
